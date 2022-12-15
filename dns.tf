@@ -17,73 +17,145 @@ resource "google_dns_response_policy" "pga-response-policy" {
   }
 }
 
-resource "google_dns_response_policy_rule" "googleapis-response-policy-rule" {
+resource "google_dns_response_policy_rule" "priv-googleapis-response-policy-rule-a" {
   provider = google-beta
 
   project         = var.project
   response_policy = google_dns_response_policy.pga-response-policy.response_policy_name
-  rule_name       = "googleapis"
+  rule_name       = "priv-googleapis-a"
+  dns_name        = "private.googleapis.com."
+
+  local_data {
+    local_datas {
+      name    = "private.googleapis.com."
+      type    = "A"
+      ttl     = 300
+      rrdatas = local.rrdatas
+    }
+  }
+}
+
+resource "google_dns_response_policy_rule" "googleapis-response-policy-rule-cname" {
+  provider = google-beta
+
+  project         = var.project
+  response_policy = google_dns_response_policy.pga-response-policy.response_policy_name
+  rule_name       = "googleapis-cname"
   dns_name        = "*.googleapis.com."
 
   local_data {
     local_datas {
       name    = "*.googleapis.com."
-      type    = "A"
-      ttl     = 3600
-      rrdatas = local.rrdatas
+      type    = "CNAME"
+      ttl     = 300
+      rrdatas = ["private.googleapis.com."]
     }
   }
 }
 
-resource "google_dns_response_policy_rule" "gcr-response-policy-rule" {
+resource "google_dns_response_policy_rule" "gcr-response-policy-rule-cname" {
   provider = google-beta
 
   project         = var.project
   response_policy = google_dns_response_policy.pga-response-policy.response_policy_name
-  rule_name       = "gcr"
+  rule_name       = "gcr-io-cname"
   dns_name        = "*.gcr.io."
 
   local_data {
     local_datas {
       name    = "*.gcr.io."
+      type    = "CNAME"
+      ttl     = 300
+      rrdatas = ["gcr.io."]
+    }
+  }
+}
+
+resource "google_dns_response_policy_rule" "gcr-response-policy-rule-a" {
+  provider = google-beta
+
+  project         = var.project
+  response_policy = google_dns_response_policy.pga-response-policy.response_policy_name
+  rule_name       = "gcr-io-a"
+  dns_name        = "gcr.io."
+
+  local_data {
+    local_datas {
+      name    = "gcr.io."
       type    = "A"
-      ttl     = 3600
+      ttl     = 300
       rrdatas = local.rrdatas
     }
   }
 }
 
-resource "google_dns_response_policy_rule" "pkg-dev-response-policy-rule" {
+resource "google_dns_response_policy_rule" "pkg-dev-response-policy-rule-cname" {
   provider = google-beta
 
   project         = var.project
   response_policy = google_dns_response_policy.pga-response-policy.response_policy_name
-  rule_name       = "pkg-dev"
+  rule_name       = "pkg-dev-cname"
   dns_name        = "*.pkg.dev."
 
   local_data {
     local_datas {
       name    = "*.pkg.dev."
+      type    = "CNAME"
+      ttl     = 300
+      rrdatas = ["pkg.dev."]
+    }
+  }
+}
+
+resource "google_dns_response_policy_rule" "pkg-dev-response-policy-rule-a" {
+  provider = google-beta
+
+  project         = var.project
+  response_policy = google_dns_response_policy.pga-response-policy.response_policy_name
+  rule_name       = "pkg-dev-a"
+  dns_name        = "pkg.dev."
+
+  local_data {
+    local_datas {
+      name    = "pkg.dev."
       type    = "A"
-      ttl     = 3600
+      ttl     = 300
       rrdatas = local.rrdatas
     }
   }
 }
 
-resource "google_dns_response_policy_rule" "notebooks-response-policy-rule" {
+resource "google_dns_response_policy_rule" "notebooks-response-policy-rule-cname" {
   provider = google-beta
 
   project         = var.project
   response_policy = google_dns_response_policy.pga-response-policy.response_policy_name
-  rule_name       = "notebooks"
+  rule_name       = "notebooks-cname"
   dns_name        = "*.notebooks.cloud.google.com."
 
   local_data {
     local_datas {
       name    = "*.notebooks.cloud.google.com."
+      type    = "CNAME"
+      ttl     = 300
+      rrdatas = ["notebooks.cloud.google.com."]
+    }
+  }
+}
+
+resource "google_dns_response_policy_rule" "notebooks-response-policy-rule-a" {
+  provider = google-beta
+
+  project         = var.project
+  response_policy = google_dns_response_policy.pga-response-policy.response_policy_name
+  rule_name       = "notebooks-a"
+  dns_name        = "notebooks.cloud.google.com."
+
+  local_data {
+    local_datas {
+      name    = "notebooks.cloud.google.com."
       type    = "A"
-      ttl     = 3600
+      ttl     = 300
       rrdatas = local.rrdatas
     }
   }
