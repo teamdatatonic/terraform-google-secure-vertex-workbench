@@ -63,22 +63,22 @@ output "dns_policy_id" {
 
 output "googleapis-response-policy-rule_id" {
   description = "an identifier for the googleapis dns policy rule with format projects/{{project}}/responsePolicies/{{response_policy}}/rules/{{rule_name}}"
-  value       = google_dns_response_policy_rule.googleapis-response-policy-rule.id
+  value       = google_dns_response_policy_rule.googleapis-response-policy-rule-cname.id
 }
 
 output "gcr-response-policy-rule_id" {
   description = "an identifier for the gcr dns policy rule with format projects/{{project}}/responsePolicies/{{response_policy}}/rules/{{rule_name}}"
-  value       = google_dns_response_policy_rule.gcr-response-policy-rule.id
+  value       = google_dns_response_policy_rule.gcr-response-policy-rule-cname.id
 }
 
 output "pkg-response-policy-rule_id" {
   description = "an identifier for the pkg.dev dns policy rule with format projects/{{project}}/responsePolicies/{{response_policy}}/rules/{{rule_name}}"
-  value       = google_dns_response_policy_rule.pkg-dev-response-policy-rule.id
+  value       = google_dns_response_policy_rule.pkg-dev-response-policy-rule-cname.id
 }
 
 output "notebooks-response-policy-rule_id" {
   description = "an identifier for the notebooks dns policy rule with format projects/{{project}}/responsePolicies/{{response_policy}}/rules/{{rule_name}}"
-  value       = google_dns_response_policy_rule.notebooks-response-policy-rule.id
+  value       = google_dns_response_policy_rule.notebooks-response-policy-rule-cname.id
 }
 
 # GCS Bucket Outputs

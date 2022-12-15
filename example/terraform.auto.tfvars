@@ -1,15 +1,15 @@
-project              = "example-project"
+project              = "dt-architecture-framework-dev"
 zone                 = "europe-west1-b"
 region               = "europe-west1"
 vpc_network_name     = "example-vpc"
 subnet_ip_cidr_range = "10.1.0.0/24"
-gcs_bucket_name      = "example-bucket-1223234"
+gcs_bucket_name      = "example-bucket-stan-3238294u72"
 gcs_labels           = { "foo" : "bar" }
 
 notebooks = {
   "example-nb-instance" : {
     "labels" : { "foo" : "bar" },
-    "instance_owners" : ["example@datatonic.com"]
+    "instance_owners" : ["stan.hill@datatonic.com"]
     "metadata" : {}
   }
 }
