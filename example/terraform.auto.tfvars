@@ -1,17 +1,25 @@
-project              = "your-project-name"
+project              = "dt-ariadna-sandbox-dev"
 zone                 = "europe-west1-b"
 region               = "europe-west1"
-vpc_network_name     = "example-vpc"
+vpc_network_name     = "notebooks-vpc"
 subnet_ip_cidr_range = "10.1.0.0/24"
-gcs_bucket_name      = "example-bucket-name"
+gcs_bucket_name      = "notebook-um-example-ariadna"
 gcs_labels           = { "foo" : "bar" }
 
 notebooks = {
-  "example-nb-instance" : {
+  "example-runtime-instance" : {
     "labels" : { "foo" : "bar" },
-    "instance_owners" : ["example@example.com"]
+    "instance_owners" : "ariadna.fernandez@datatonic.com"
     "metadata" : {}
+    "type": "runtime-notebook",
   }
+  "example-user-manage-instance" : {
+    "labels" : { "foo" : "bar" },
+    "instance_owners" : "ariadna.fernandez@datatonic.com"
+    "metadata" : {}
+    "access_type": "SERVICE_ACCOUNT"
+    "type": "runtime-notebook"
+}
 }
 
 additional_vertex_nb_sa_roles = [

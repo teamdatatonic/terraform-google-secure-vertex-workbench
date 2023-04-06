@@ -84,6 +84,12 @@ variable "accelerator_core_count" {
   default     = 1
 }
 
+variable "access_type" {
+  description = "Access type for Runtime Notebooks. Possible values are SINGLE_USER, SERVICE_ACCOUNT and RUNTIME_ACCESS_TYPE_UNSPECIFIED"
+  type        = string
+  default     = "SINGLE_USER"
+}
+
 # IAM Variables
 
 variable "additional_vertex_nb_sa_roles" {
