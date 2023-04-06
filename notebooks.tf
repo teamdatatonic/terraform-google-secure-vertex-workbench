@@ -82,22 +82,22 @@ resource "google_notebooks_runtime" "runtime_notebook_instance" {
 
   name     = each.key
   location = var.region
-  project = var.project
+  project  = var.project
 
   access_config {
-    access_type = lookup(each.value, "access_type", var.access_type)
-    runtime_owner =  var.access_type == "SINGLE_USER" ? lookup(each.value, "instance_owners", null) : (var.access_type == "SERVICE_ACCOUNT" ? google_service_account.vertex_service_account.email : null ) #TODO: this statement is not working properly
-}
+    access_type   = lookup(each.value, "access_type", var.access_type)
+    runtime_owner = var.access_type == "SINGLE_USER" ? lookup(each.value, "instance_owners", null) : (var.access_type == "SERVICE_ACCOUNT" ? google_service_account.vertex_service_account.email : null) #TODO: this statement is not working properly
+  }
 
   software_config {
     post_startup_script = "${google_storage_bucket.bucket.url}/${google_storage_bucket_object.postscript.name}"
-    install_gpu_driver = lookup(each.value, "install_gpu_driver", var.install_gpu_driver)
+    install_gpu_driver  = lookup(each.value, "install_gpu_driver", var.install_gpu_driver)
   }
 
   virtual_machine {
     virtual_machine_config {
       machine_type = lookup(each.value, "machine_type", var.machine_type)
-      labels = lookup(each.value, "nb_labels", null)
+      labels       = lookup(each.value, "nb_labels", null)
       metadata = {
         terraform                  = lookup(each.value["metadata"], "terraform", "true")
         notebook-disable-root      = lookup(each.value["metadata"], "notebook-disable-root", "true")
@@ -105,18 +105,18 @@ resource "google_notebooks_runtime" "runtime_notebook_instance" {
         notebook-disable-nbconvert = lookup(each.value["metadata"], "notebook-disable-nbconvert", "true")
         report-system-health       = lookup(each.value["metadata"], "report-system-health", "true")
       }
-      network = google_compute_network.vpc_network.id
-      subnet = google_compute_subnetwork.vertex-subnetwork.id
+      network          = google_compute_network.vpc_network.id
+      subnet           = google_compute_subnetwork.vertex-subnetwork.id
       internal_ip_only = true
       data_disk {
         initialize_params {
           disk_size_gb = lookup(each.value, "data_disk_size_gb", var.data_disk_size_gb)
-          disk_type = lookup(each.value, "boot_disk_type", var.boot_disk_type)
+          disk_type    = lookup(each.value, "boot_disk_type", var.boot_disk_type)
         }
       }
       accelerator_config {
         core_count = lookup(each.value, "accelerator_core_count", var.accelerator_core_count)
-        type = lookup(each.value, "accelerator_type", "NVIDIA_TESLA_P100")
+        type       = lookup(each.value, "accelerator_type", "NVIDIA_TESLA_P100")
       }
     }
   }

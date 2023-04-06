@@ -8,19 +8,20 @@ variable "project" {
 variable "zone" {
   description = "The GCP Zone for Vertex Notebook User-Managed Instances"
   type        = string
-  default = "europe-west1-b"
+  default     = "europe-west1-b"
 }
 
 variable "region" {
   description = "The GCP region for the GCS bucket and Artifact Registry"
   type        = string
-  default = "europe-west1"
+  default     = "europe-west1"
 }
 
 # Notebooks Variables
 
 variable "notebooks" {
   description = "A map containing the containing the configuration for the desired Vertex AI Workbench User-Managed Notebooks"
+  type        = any
   default     = {}
 }
 
@@ -94,6 +95,7 @@ variable "access_type" {
 
 variable "additional_vertex_nb_sa_roles" {
   description = "Additional roles that you may want to assign to the Vertex AI NB SA"
+  type        = list(any)
   default     = []
 }
 
@@ -135,5 +137,6 @@ variable "gcs_labels" {
 
 variable "additional_fw_rules" {
   description = "Additional firewall rules that you may want to create to allow other traffic"
+  type        = list(any)
   default     = []
 }

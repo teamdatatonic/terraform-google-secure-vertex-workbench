@@ -9,13 +9,14 @@ gcs_labels           = { "foo" : "bar" }
 notebooks = {
   "example-runtime-instance" : {
     "labels" : { "foo" : "bar" },
-    "instance_owners" : "ariadna.fernandez@datatonic.com"
+    "instance_owners" : ["ariadna.fernandez@datatonic.com"] # In user managed notebooks we need a list
+    "access_type": "SINGLE_USER"
     "metadata" : {}
-    "type": "runtime-notebook",
+    "type": "user-managed-notebook",
   }
   "example-user-manage-instance" : {
     "labels" : { "foo" : "bar" },
-    "instance_owners" : "ariadna.fernandez@datatonic.com"
+    "instance_owners" : "ariadna.fernandez@datatonic.com" # In runtime notebooks we need a string
     "metadata" : {}
     "access_type": "SERVICE_ACCOUNT"
     "type": "runtime-notebook"
