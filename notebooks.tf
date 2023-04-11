@@ -114,9 +114,12 @@ resource "google_notebooks_runtime" "runtime_notebook_instance" {
           disk_type    = lookup(each.value, "boot_disk_type", var.boot_disk_type)
         }
       }
-      accelerator_config {
-        core_count = lookup(each.value, "accelerator_core_count", var.accelerator_core_count)
-        type       = lookup(each.value, "accelerator_type", "NVIDIA_TESLA_P100")
+      dynamic "accelerator_config" {
+        for_each = lookup(each.value, "accelerator_type", var.accelerator_type) == "ACCELERATOR_TYPE_UNSPECIFIED" ? [] : [1]
+        content {
+          type       = lookup(each.value, "accelerator_type", var.accelerator_type)
+          core_count = lookup(each.value, "accelerator_core_count", var.accelerator_core_count)
+        }
       }
     }
   }
