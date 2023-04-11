@@ -1,22 +1,21 @@
-project              = "dt-ariadna-sandbox-dev"
+project              = "your-project-name"
 zone                 = "europe-west1-b"
 region               = "europe-west1"
-vpc_network_name     = "notebooks-vpc"
+vpc_network_name     = "example-vpc"
 subnet_ip_cidr_range = "10.1.0.0/24"
-gcs_bucket_name      = "notebook-um-example-ariadna"
+gcs_bucket_name      = "example-bucket-name"
 gcs_labels           = { "foo" : "bar" }
 
 notebooks = {
-  "example-runtime-instance" : {
+  "example-user-managed-instance" : {
     "labels" : { "foo" : "bar" },
-    "instance_owners" : ["ariadna.fernandez@datatonic.com"] # In user managed notebooks we need a list
-    "access_type": "SINGLE_USER"
+    "instance_owners" : "example@example.com"
     "metadata" : {}
     "type": "user-managed-notebook",
   }
-  "example-user-manage-instance" : {
+  "example-runtime-instance" : {
     "labels" : { "foo" : "bar" },
-    "instance_owners" : "ariadna.fernandez@datatonic.com" # In runtime notebooks we need a string
+    "instance_owners" : "example@example.com"
     "metadata" : {}
     "access_type": "SERVICE_ACCOUNT"
     "type": "runtime-notebook"

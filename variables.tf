@@ -79,6 +79,7 @@ variable "accelerator_type" {
   default     = "ACCELERATOR_TYPE_UNSPECIFIED"
 }
 
+
 variable "accelerator_core_count" {
   description = "Count cores of accelerator."
   type        = number
