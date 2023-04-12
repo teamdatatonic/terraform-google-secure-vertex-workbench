@@ -73,8 +73,8 @@ Then perform the following commands on the root folder:
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 4.60.1 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.60.1 |
+| <a name="provider_google"></a> [google](#provider\_google) | >= 0.14.5 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | >= 0.14.5 |
 
 ## Modules
 
