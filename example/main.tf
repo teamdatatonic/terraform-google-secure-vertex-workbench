@@ -8,7 +8,7 @@ module "private_vertex_nb_instances" {
   vpc_network_name              = var.vpc_network_name
   subnet_ip_cidr_range          = var.subnet_ip_cidr_range
   vpc_sc_enabled                = false
+  additional_fw_rules           = var.additional_fw_rules
   gcs_bucket_name               = var.gcs_bucket_name
   gcs_labels                    = var.gcs_labels
-  additional_fw_rules           = var.additional_fw_rules
 }
