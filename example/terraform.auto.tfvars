@@ -11,15 +11,15 @@ notebooks = {
     "labels" : { "foo" : "bar" },
     "instance_owner" : "example@example.com"
     "metadata" : {}
-    "type": "user-managed-notebook",
+    "type" : "user-managed-notebook",
   }
   "example-google-managed-instance" : {
     "labels" : { "foo" : "bar" },
     "instance_owner" : "example@example.com"
     "metadata" : {}
-    "access_type": "SERVICE_ACCOUNT"
-    "type": "google-managed-notebook"
-}
+    "access_type" : "SERVICE_ACCOUNT"
+    "type" : "google-managed-notebook"
+  }
 }
 
 additional_vertex_nb_sa_roles = [
