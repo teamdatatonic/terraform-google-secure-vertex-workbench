@@ -16,11 +16,11 @@ variable "region" {
 variable "notebooks" {
   description = "A map containing the containing the configuration for the desired Vertex AI Workbench User-Managed Notebooks"
   type = map(object({
-    labels          = map(string),
-    instance_owners = string,
-    metadata        = map(string),
-    type            = string,
-    access_type     = optional(string)
+    labels         = map(string),
+    instance_owner = string,
+    metadata       = map(string),
+    type           = string,
+    access_type    = optional(string)
   }))
   default = {}
 }
@@ -55,6 +55,27 @@ variable "gcs_labels" {
 
 variable "additional_fw_rules" {
   description = "Additional firewall rules that you may want to create to allow other traffic"
-  type        = list(any)
-  default     = []
+  type = list(object({
+    name                    = string
+    description             = string
+    direction               = string
+    priority                = number
+    ranges                  = list(string)
+    source_tags             = optional(list(string))
+    source_service_accounts = optional(list(string))
+    target_tags             = optional(list(string))
+    target_service_accounts = optional(list(string))
+    allow = list(object({
+      protocol = string
+      ports    = list(string)
+    }))
+    deny = list(object({
+      protocol = string
+      ports    = list(string)
+    }))
+    log_config = optional(object({
+      metadata = string
+    }))
+  }))
+  default = []
 }

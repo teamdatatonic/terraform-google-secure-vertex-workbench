@@ -23,7 +23,7 @@ resource "google_notebooks_instance" "notebook_instance" {
 
   labels = lookup(each.value, "nb_labels", null)
 
-  instance_owners = [lookup(each.value, "instance_owners", null)]
+  instance_owners = [lookup(each.value, "instance_owner", null)]
 
   service_account = google_service_account.vertex_service_account.email
 
@@ -86,7 +86,7 @@ resource "google_notebooks_runtime" "runtime_notebook_instance" {
 
   access_config {
     access_type   = lookup(each.value, "access_type", var.access_type)
-    runtime_owner = lookup(each.value, "access_type", var.access_type) == "SINGLE_USER" ? lookup(each.value, "instance_owners", null) : (lookup(each.value, "access_type", var.access_type) == "SERVICE_ACCOUNT" ? google_service_account.vertex_service_account.email : null)
+    runtime_owner = lookup(each.value, "access_type", var.access_type) == "SINGLE_USER" ? lookup(each.value, "instance_owner", null) : (lookup(each.value, "access_type", var.access_type) == "SERVICE_ACCOUNT" ? google_service_account.vertex_service_account.email : null)
   }
 
   software_config {

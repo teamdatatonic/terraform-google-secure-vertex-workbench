@@ -88,14 +88,14 @@ output "gcs_bucket_url" {
 
 # Notebooks Outputs
 
-output "runtime_notebook_id" {
+output "google_managed_notebook_id" {
   description = "an identifier for the fw rules with format projects/{{project}}/global/firewalls/{{name}}"
-  value       = module.private_vertex_nb_instances.runtime_notebook_id
+  value       = module.private_vertex_nb_instances.google_managed_notebook_id
 }
 
-output "runtime-notebooks-response-policy-rule-id" {
+output "google-managed-notebooks-response-policy-rule-id" {
   description = "an identifier for the notebooks dns policy rule with format projects/{{project}}/responsePolicies/{{response_policy}}/rules/{{rule_name}}"
-  value       = module.private_vertex_nb_instances.runtime_notebook_id
+  value       = module.private_vertex_nb_instances.google_managed_notebook_id
 }
 
 output "user_managed_notebook_id" {

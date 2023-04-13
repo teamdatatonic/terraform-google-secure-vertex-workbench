@@ -102,7 +102,7 @@ output "user_managed_notebook_id" {
   }
 }
 
-output "runtime_notebook_id" {
+output "google_managed_notebook_id" {
   description = "an identifier for the notebooks with format projects/{{project}}/global/firewalls/{{name}}"
   value = {
     for k, nb in google_notebooks_runtime.runtime_notebook_instance : k => nb.id
