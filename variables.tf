@@ -21,8 +21,14 @@ variable "region" {
 
 variable "notebooks" {
   description = "A map containing the containing the configuration for the desired Vertex AI Workbench User-Managed Notebooks"
-  type        = any
-  default     = {}
+  type = map(object({
+    labels          = map(string),
+    instance_owners = string,
+    metadata        = map(string),
+    type            = string,
+    access_type     = optional(string)
+  }))
+  default = {}
 }
 
 variable "image_project" {
@@ -96,7 +102,7 @@ variable "access_type" {
 
 variable "additional_vertex_nb_sa_roles" {
   description = "Additional roles that you may want to assign to the Vertex AI NB SA"
-  type        = list(any)
+  type        = list(string)
   default     = []
 }
 

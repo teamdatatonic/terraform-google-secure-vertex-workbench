@@ -93,7 +93,7 @@ output "runtime_notebook_id" {
   value       = module.private_vertex_nb_instances.runtime_notebook_id
 }
 
-output "runtime-notebooks-response-policy-rule_id" {
+output "runtime-notebooks-response-policy-rule-id" {
   description = "an identifier for the notebooks dns policy rule with format projects/{{project}}/responsePolicies/{{response_policy}}/rules/{{rule_name}}"
   value       = module.private_vertex_nb_instances.runtime_notebook_id
 }
@@ -103,7 +103,7 @@ output "user_managed_notebook_id" {
   value       = module.private_vertex_nb_instances.user_managed_notebook_id
 }
 
-output "user-managed-notebooks-response-policy-rule_id" {
+output "user-managed-notebooks-response-policy-rule-id" {
   description = "an identifier for the notebooks dns policy rule with format projects/{{project}}/responsePolicies/{{response_policy}}/rules/{{rule_name}}"
   value       = module.private_vertex_nb_instances.user_managed_notebook_id
 }

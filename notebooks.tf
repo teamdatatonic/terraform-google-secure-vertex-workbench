@@ -1,7 +1,7 @@
 locals {
-  runtime_notebooks = {
+  google_managed_notebooks = {
     for notebook, values in var.notebooks : notebook => values
-    if values.type == "runtime-notebook"
+    if values.type == "google-managed-notebook"
   }
   user_managed_notebooks = {
     for notebook, values in var.notebooks : notebook => values
@@ -78,7 +78,7 @@ resource "google_notebooks_instance" "notebook_instance" {
 
 resource "google_notebooks_runtime" "runtime_notebook_instance" {
 
-  for_each = local.runtime_notebooks
+  for_each = local.google_managed_notebooks
 
   name     = each.key
   location = var.region

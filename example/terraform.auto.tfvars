@@ -18,7 +18,7 @@ notebooks = {
     "instance_owners" : "example@example.com"
     "metadata" : {}
     "access_type": "SERVICE_ACCOUNT"
-    "type": "runtime-notebook"
+    "type": "google-managed-notebook"
 }
 }
 
