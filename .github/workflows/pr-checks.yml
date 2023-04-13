@@ -25,5 +25,8 @@ jobs:
       - uses: terraform-linters/setup-tflint@v2.0.0
         name: Setup TFLint
 
+      - uses: terraform-docs/gh-actions@main
+        name: Setup terraform-docs
+
       - uses: pre-commit/action@v3.0.0
         name: Pre-commit checks
