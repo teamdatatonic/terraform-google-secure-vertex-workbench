@@ -8,6 +8,9 @@ on:
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: hashicorp/setup-terraform@v2
 
@@ -25,8 +28,12 @@ jobs:
       - uses: terraform-linters/setup-tflint@v2.0.0
         name: Setup TFLint
 
-      - uses: terraform-docs/gh-actions@main
-        name: Setup terraform-docs
+      - name: Terraform Docs
+        run: |
+          curl -Lo ./terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v0.16.0/terraform-docs-v0.16.0-$(uname)-amd64.tar.gz
+          tar -xzf terraform-docs.tar.gz
+          chmod +x terraform-docs
+          sudo mv terraform-docs /usr/bin/terraform-docs
 
       - uses: pre-commit/action@v3.0.0
         name: Pre-commit checks
