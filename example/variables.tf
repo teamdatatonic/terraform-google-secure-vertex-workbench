@@ -15,11 +15,19 @@ variable "region" {
 
 variable "notebooks" {
   description = "A map containing the containing the configuration for the desired Vertex AI Workbench User-Managed Notebooks"
-  default     = {}
+  type = map(object({
+    labels         = map(string),
+    instance_owner = string,
+    metadata       = map(string),
+    type           = string,
+    access_type    = optional(string)
+  }))
+  default = {}
 }
 
 variable "additional_vertex_nb_sa_roles" {
   description = "Additional roles that you may want to assign to the Vertex AI NB SA"
+  type        = list(string)
   default     = []
 }
 
@@ -32,12 +40,6 @@ variable "subnet_ip_cidr_range" {
   description = "The name of your VPC Subnetwork"
   type        = string
   default     = "10.0.0.0/21"
-}
-
-variable "vpc_sc_enabled" {
-  description = "A boolean flag to signal whether this enviornment is inside a VPC SC Perimeter"
-  type        = bool
-  default     = false
 }
 
 variable "gcs_bucket_name" {
@@ -53,5 +55,27 @@ variable "gcs_labels" {
 
 variable "additional_fw_rules" {
   description = "Additional firewall rules that you may want to create to allow other traffic"
-  default     = []
+  type = list(object({
+    name                    = string
+    description             = string
+    direction               = string
+    priority                = number
+    ranges                  = list(string)
+    source_tags             = optional(list(string))
+    source_service_accounts = optional(list(string))
+    target_tags             = optional(list(string))
+    target_service_accounts = optional(list(string))
+    allow = list(object({
+      protocol = string
+      ports    = list(string)
+    }))
+    deny = list(object({
+      protocol = string
+      ports    = list(string)
+    }))
+    log_config = optional(object({
+      metadata = string
+    }))
+  }))
+  default = []
 }

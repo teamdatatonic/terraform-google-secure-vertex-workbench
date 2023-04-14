@@ -7,10 +7,18 @@ gcs_bucket_name      = "example-bucket-name"
 gcs_labels           = { "foo" : "bar" }
 
 notebooks = {
-  "example-nb-instance" : {
+  "example-user-managed-instance" : {
     "labels" : { "foo" : "bar" },
-    "instance_owners" : ["example@example.com"]
+    "instance_owner" : "example@example.com"
     "metadata" : {}
+    "type" : "user-managed-notebook",
+  }
+  "example-google-managed-instance" : {
+    "labels" : { "foo" : "bar" },
+    "instance_owner" : "example@example.com"
+    "metadata" : {}
+    "access_type" : "SERVICE_ACCOUNT"
+    "type" : "google-managed-notebook"
   }
 }
 

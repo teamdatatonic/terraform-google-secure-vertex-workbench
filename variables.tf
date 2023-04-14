@@ -8,20 +8,27 @@ variable "project" {
 variable "zone" {
   description = "The GCP Zone for Vertex Notebook User-Managed Instances"
   type        = string
-  default = "europe-west1-b"
+  default     = "europe-west1-b"
 }
 
 variable "region" {
   description = "The GCP region for the GCS bucket and Artifact Registry"
   type        = string
-  default = "europe-west1"
+  default     = "europe-west1"
 }
 
 # Notebooks Variables
 
 variable "notebooks" {
   description = "A map containing the containing the configuration for the desired Vertex AI Workbench User-Managed Notebooks"
-  default     = {}
+  type = map(object({
+    labels         = map(string),
+    instance_owner = string,
+    metadata       = map(string),
+    type           = string,
+    access_type    = optional(string)
+  }))
+  default = {}
 }
 
 variable "image_project" {
@@ -78,16 +85,24 @@ variable "accelerator_type" {
   default     = "ACCELERATOR_TYPE_UNSPECIFIED"
 }
 
+
 variable "accelerator_core_count" {
   description = "Count cores of accelerator."
   type        = number
   default     = 1
 }
 
+variable "access_type" {
+  description = "Access type for Runtime Notebooks. Possible values are SINGLE_USER, SERVICE_ACCOUNT and RUNTIME_ACCESS_TYPE_UNSPECIFIED"
+  type        = string
+  default     = "SINGLE_USER"
+}
+
 # IAM Variables
 
 variable "additional_vertex_nb_sa_roles" {
   description = "Additional roles that you may want to assign to the Vertex AI NB SA"
+  type        = list(string)
   default     = []
 }
 
@@ -129,5 +144,27 @@ variable "gcs_labels" {
 
 variable "additional_fw_rules" {
   description = "Additional firewall rules that you may want to create to allow other traffic"
-  default     = []
+  type = list(object({
+    name                    = string
+    description             = string
+    direction               = string
+    priority                = number
+    ranges                  = list(string)
+    source_tags             = optional(list(string))
+    source_service_accounts = optional(list(string))
+    target_tags             = optional(list(string))
+    target_service_accounts = optional(list(string))
+    allow = list(object({
+      protocol = string
+      ports    = list(string)
+    }))
+    deny = list(object({
+      protocol = string
+      ports    = list(string)
+    }))
+    log_config = optional(object({
+      metadata = string
+    }))
+  }))
+  default = []
 }

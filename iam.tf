@@ -9,7 +9,8 @@ locals {
     "roles/storage.admin",
     "roles/storage.objectAdmin",
     "roles/logging.admin",
-    "roles/artifactregistry.admin"
+    "roles/artifactregistry.admin",
+    "roles/notebooks.admin"
   ]
   vertex_nb_sa_roles = concat(local.default_vertex_nb_sa_roles, var.additional_vertex_nb_sa_roles)
 }
