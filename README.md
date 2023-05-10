@@ -1,14 +1,14 @@
 # Terraform Private Vertex AI Workbench Notebooks Module
 
-This module deploys [Vertex AI Workbench User-Managed Notebooks](https://cloud.google.com/vertex-ai/docs/workbench/user-managed/introduction) and [Vertex AI Workbench Managed Notebooks](https://cloud.google.com/vertex-ai/docs/workbench/managed/introduction) on GCP that are private (interal IP only), while still remaining easily usable and accessible by the user of the notebook.
+This module deploys [Vertex AI Workbench User-Managed Notebooks](https://cloud.google.com/vertex-ai/docs/workbench/user-managed/introduction) and [Vertex AI Workbench Managed Notebooks](https://cloud.google.com/vertex-ai/docs/workbench/managed/introduction) on GCP that are private (internal IP only), while still remaining easily usable and accessible by the user of the notebook.
 
 ## Introduction
 
-User-Managed and Managed Notebooks on Vertex AI allow users to easily deploy GCE VMs with JupyterLab pre-installed. These VMs, by default, use external IP in order to spin up the instance (by running startup scripts), as well as to actually use the Jupyter notebook, such as installing Python libraries from PyPi or interacting with GitHub.
+User-Managed and Managed Notebooks on Vertex AI allow users to easily deploy GCE VMs with JupyterLab pre-installed. These VMs use an external IP address by default for access to the internet for the purposes of setting up the instance (running startup scripts), exposing the Jupyter user interface, and accessing 3rd party services (such as PyPI and GitHub).
 
-The problem with this is the security issue that arises with external IP. GCE VM Security best practice states that VMs should not have an external IP assigned to it, unless absolutely necessary, as it opens the instance up to attack from the public internet. Therefore, by default, Vertex AI User-Managed Notebooks are, by default, vulnerable to attach from the public internet too.
+The problem with this is the security issue that arises with external IP addresses. GCE VM Security best practice states that VMs should not have an external IP assigned to it (unless absolutely necessary), as it opens the instance up to attack from the public internet. Therefore, by default, Vertex AI Managed and User-Managed Notebooks are vulnerable to attack from the public internet too.
 
-This Terraform module is the answer to this problem. The security and networking configuration that the Vertex Notebooks in this module use allows the Notebooks to be deployed with only internal IP (no external IP), while still maintaining the useability and accessibility (ie. can be still accessed directly via the GCP Vertex Workbench GUI by clicking the 'OPEN JUPYTERLAB' button).
+This Terraform module is the answer to this problem. The module deploys Vertex Workbench instances using only internal IP addresses while still allowing the user interface to be accessed directly via the GCP Vertex Workbench GUI by clicking the 'OPEN JUPYTERLAB' button.
 
 
 ## Architecture
@@ -40,7 +40,8 @@ There is an example of how to use this module in the [example](./example/) folde
 
 ```hcl
 module "private_vertex_nb_instances" {
-  source                        = "<LINK TO MODULE SOURCE>"
+  source                        = "teamdatatonic/secure-vertex-workbench/google"
+  version                       = "2.0.0"
   project                       = var.project
   zone                          = var.zone
   region                        = var.region
