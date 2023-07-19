@@ -1,11 +1,11 @@
 locals {
   default_fw_rules = [
     {
-      name                    = "ingress-allow-tcp-git"
-      description             = "To allow connection to GitHub git endpoints - Ingress"
-      direction               = "INGRESS"
-      priority                = 65534
-      ranges                  = [
+      name        = "ingress-allow-tcp-git"
+      description = "To allow connection to GitHub git endpoints - Ingress"
+      direction   = "INGRESS"
+      priority    = 65534
+      ranges = [
         "192.30.252.0/22",
         "20.205.243.166/32",
         "20.27.177.113/32",
@@ -69,11 +69,11 @@ locals {
       }
     },
     {
-      name                    = "egress-allow-tcp-git"
-      description             = "To allow connection to GitHub git endpoints - Egress"
-      direction               = "EGRESS"
-      priority                = 65534
-      ranges                  = [
+      name        = "egress-allow-tcp-git"
+      description = "To allow connection to GitHub git endpoints - Egress"
+      direction   = "EGRESS"
+      priority    = 65534
+      ranges = [
         "192.30.252.0/22",
         "20.205.243.166/32",
         "20.27.177.113/32",
