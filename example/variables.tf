@@ -16,7 +16,7 @@ variable "region" {
 variable "notebooks" {
   description = "A map containing the containing the configuration for the desired Vertex AI Workbench User-Managed Notebooks"
   type = map(object({
-    labels         = map(string),
+    nb_labels         = map(string),
     instance_owner = string,
     metadata       = map(string),
     type           = string,
@@ -56,26 +56,32 @@ variable "gcs_labels" {
 variable "additional_fw_rules" {
   description = "Additional firewall rules that you may want to create to allow other traffic"
   type = list(object({
-    name                    = string
-    description             = string
-    direction               = string
-    priority                = number
-    ranges                  = list(string)
-    source_tags             = optional(list(string))
-    source_service_accounts = optional(list(string))
-    target_tags             = optional(list(string))
+    name        = string
+    description = string
+    action = string
+    direction   = string
+    disabled = bool
+    priority    = number
+    enable_logging = bool
     target_service_accounts = optional(list(string))
-    allow = list(object({
-      protocol = string
-      ports    = list(string)
-    }))
-    deny = list(object({
-      protocol = string
-      ports    = list(string)
-    }))
-    log_config = optional(object({
-      metadata = string
+    match = list(object({
+      dest_address_groups = list(string)
+      dest_fqdns = list(string)
+      dest_ip_ranges  = list(string)
+      dest_region_codes = list(string)
+      dest_threat_intelligences = list(string)
+      src_address_groups = list(string)
+      src_fqdns = list(string)
+      src_ip_ranges = list(string)
+      src_region_codes = list(string)
+      src_threat_intelligences = list(string)
+      ip_protocol = string
     }))
   }))
   default = []
+}
+
+variable "deployment_scope" {
+  description = "REQUIRED - whether the Firewall Policy is REGIONAL or GLOBAL"
+  default = "GLOBAL"
 }

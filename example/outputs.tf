@@ -49,8 +49,8 @@ output "nat_id" {
 
 # FW Rules Outputs
 output "firewall_id" {
-  description = "an identifier for the fw rules with format projects/{{project}}/global/firewalls/{{name}}"
-  value       = module.private_vertex_nb_instances.firewall_id
+  description = "an identifier for the fw policy rules with format projects/{{project}}/global/firewallPolicies/{{firewall_policy}}/rules/{{priority}}"
+  value       = module.private_vertex_nb_instances.firewall_polcy_rule_id
 }
 
 # DNS Outputs
