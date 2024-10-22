@@ -1,24 +1,16 @@
-project              = "your-project-name"
+project              = "dt-val-sandbox-dev"
 zone                 = "europe-west1-b"
 region               = "europe-west1"
-vpc_network_name     = "example-vpc"
+vpc_network_name     = "dt-val-sandbox-dev-vpc-tf"
 subnet_ip_cidr_range = "10.1.0.0/24"
-gcs_bucket_name      = "example-bucket-name"
-gcs_labels           = { "foo" : "bar" }
+gcs_bucket_name      = "tf-workbench-notebook"
+gcs_labels           = { "tf" : "workbench" }
 
 notebooks = {
-  "example-user-managed-instance" : {
-    "labels" : { "foo" : "bar" },
-    "instance_owner" : "example@example.com"
+  "iso-google-workbench-instance" : {
+    "labels" : { "iso" : "test" },
+    "instance_owner" : "valentin.cojocaru@datatonic.com"
     "metadata" : {}
-    "type" : "user-managed-notebook",
-  }
-  "example-google-managed-instance" : {
-    "labels" : { "foo" : "bar" },
-    "instance_owner" : "example@example.com"
-    "metadata" : {}
-    "access_type" : "SERVICE_ACCOUNT"
-    "type" : "google-managed-notebook"
   }
 }
 

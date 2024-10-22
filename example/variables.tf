@@ -19,7 +19,6 @@ variable "notebooks" {
     labels         = map(string),
     instance_owner = string,
     metadata       = map(string),
-    type           = string,
     access_type    = optional(string)
   }))
   default = {}
